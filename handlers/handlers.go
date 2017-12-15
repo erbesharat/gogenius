@@ -9,11 +9,27 @@ import (
 
 const baseURI = "https://api.genius.com/"
 
-func GetReferentsURI(key string) string {
-	return fmt.Sprintf("%s%s%s", baseURI, "referents?web_page_id=", key)
+func GetResourceURI(url string, key string) string {
+	return fmt.Sprintf("%s%s%s", baseURI, url, key)
+}
+
+func GetArtistSongsURI(artistID string) string {
+	return fmt.Sprintf("%s%s", GetResourceURI("artists/", artistID), "/songs")
+}
+
+func GetWebpageURI(url string) string {
+	return fmt.Sprintf("%s%s%s", baseURI, "web_pages/lookup?raw_annotatable_url=", url)
 }
 
 func GetAccessToken() string {
+	err := godotenv.Load()
+	if err != nil {
+		panic(err)
+	}
+	return os.Getenv("ACCESS_TOKEN")
+}
+
+func GetAuthorizationToken() string {
 	err := godotenv.Load()
 	if err != nil {
 		panic(err)
