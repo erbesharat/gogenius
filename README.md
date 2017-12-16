@@ -6,7 +6,26 @@
 </p>
 
 ## Usage
-TODO
+Just import it and use like this example:
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/erbesharat/gogenius"
+)
+
+func main() {
+	fmt.Println(gogenius.GetReferents("10347"))
+	fmt.Println(gogenius.GetArtist("16775"))
+	fmt.Println(gogenius.GetSong("16775"))
+	fmt.Println(gogenius.GetArtistSongs("16775"))
+	fmt.Println(gogenius.GetWebpage("https://docs.genius.com"))
+	fmt.Println(gogenius.Search("Another%20brick%20in%20the%20wall"))
+	fmt.Println(gogenius.GetAnnotation("10225840"))
+}
+```
 
 ## Contributing
 
