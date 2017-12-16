@@ -160,20 +160,27 @@ func TestSearch(t *testing.T) {
 	}
 }
 
-func TestGetCurrentAccount(t *testing.T) {
+func TestGetAnnotation(t *testing.T) {
+	type args struct {
+		id string
+	}
 	tests := []struct {
 		name string
+		args args
 		want string
 	}{
 		{
 			name: "test should return correct URI for the given ID",
+			args: args{
+				"10225840",
+			},
 			want: "something",
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := GetCurrentAccount(); got != tt.want {
-				t.Errorf("GetCurrentAccount() = %v, want %v", got, tt.want)
+			if got := GetAnnotation(tt.args.id); got != tt.want {
+				t.Errorf("GetAnnotation() = %v, want %v", got, tt.want)
 			}
 		})
 	}

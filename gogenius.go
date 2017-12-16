@@ -1,145 +1,34 @@
 package gogenius
 
 import (
-	"io/ioutil"
-	"net/http"
-
-	"github.com/erbesharat/gogenius/handlers"
+	"github.com/erbesharat/gogenius/resources"
 )
 
 // Referents Returns a list of all refrents from given page
 func Referents(webPageID string) string {
-	client := &http.Client{}
-	url := handlers.GetResourceURI("referents?web_page_id=", webPageID)
-	req, err := http.NewRequest("GET", url, nil)
-	req.Header.Add("Authorization", handlers.GetAuthorizationToken())
-	if err != nil {
-		panic(err)
-	}
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
-	}
-	data, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		panic(err)
-	}
-	return string(data)
+	return resources.GetJsonReferents(webPageID)
 }
 
 func GetSong(songID string) string {
-	client := &http.Client{}
-	url := handlers.GetResourceURI("songs/", songID)
-	req, err := http.NewRequest("GET", url, nil)
-	req.Header.Add("Authorization", handlers.GetAuthorizationToken())
-	if err != nil {
-		panic(err)
-	}
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
-	}
-	data, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		panic(err)
-	}
-	return string(data)
+	return resources.GetJsonSong(songID)
 }
 
 func GetArtist(artistID string) string {
-	client := &http.Client{}
-	url := handlers.GetResourceURI("songs/", artistID)
-	req, err := http.NewRequest("GET", url, nil)
-	req.Header.Add("Authorization", handlers.GetAuthorizationToken())
-	if err != nil {
-		panic(err)
-	}
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
-	}
-	data, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		panic(err)
-	}
-	return string(data)
+	return resources.GetJsonArtist(artistID)
 }
 
 func GetArtistSongs(artistID string) string {
-	client := &http.Client{}
-	url := handlers.GetArtistSongsURI(artistID)
-	req, err := http.NewRequest("GET", url, nil)
-	req.Header.Add("Authorization", handlers.GetAuthorizationToken())
-	if err != nil {
-		panic(err)
-	}
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
-	}
-	data, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		panic(err)
-	}
-	return string(data)
+	return resources.GetJsonArtistSongs(artistID)
 }
 
 func GetWebpage(pageURL string) string {
-	client := &http.Client{}
-	url := handlers.GetWebpageURI(pageURL)
-	req, err := http.NewRequest("GET", url, nil)
-	req.Header.Add("Authorization", handlers.GetAuthorizationToken())
-	if err != nil {
-		panic(err)
-	}
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
-	}
-	data, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		panic(err)
-	}
-	return string(data)
+	return resources.GetJsonWebPage(pageURL)
 }
 
 func Search(query string) string {
-	client := &http.Client{}
-	url := handlers.GetResourceURI("search/?q=", query)
-	req, err := http.NewRequest("GET", url, nil)
-	req.Header.Add("Authorization", handlers.GetAuthorizationToken())
-	if err != nil {
-		panic(err)
-	}
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
-	}
-	data, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		panic(err)
-	}
-	return string(data)
+	return resources.GetJsonSearch(query)
 }
 
-func GetCurrentAccount() string {
-	client := &http.Client{}
-	url := handlers.GetResourceURI("account?access_token=", handlers.GetAccessToken())
-	req, err := http.NewRequest("GET", url, nil)
-	panic(url)
-	// req.Header.Add("Authorization", handlers.GetAuthorizationToken())
-	if err != nil {
-		panic(err)
-	}
-	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
-	}
-	data, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		panic(err)
-	}
-	return string(data)
+func GetAnnotation(id string) string {
+	return resources.GetJsonAnnotation(id)
 }
-
-// ?raw_annotatable_url=https%3A%2F%2Fdocs.genius.com
