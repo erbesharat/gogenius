@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestReferents(t *testing.T) {
+func TestGetReferents(t *testing.T) {
 	type args struct {
 		webPageID string
 	}
@@ -23,8 +23,8 @@ func TestReferents(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Referents(tt.args.webPageID); got != tt.want {
-				t.Errorf("Referents() = %v, want %v", got, tt.want)
+			if got := GetReferents(tt.args.webPageID); got != tt.want {
+				t.Errorf("GetReferents() = %v, want %v", got, tt.want)
 			}
 		})
 	}

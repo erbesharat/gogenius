@@ -5,7 +5,7 @@ import (
 )
 
 // Referents Returns a list of all refrents from given page
-func Referents(webPageID string) string {
+func GetReferents(webPageID string) string {
 	return resources.GetJsonReferents(webPageID)
 }
 
