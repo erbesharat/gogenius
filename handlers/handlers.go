@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/erbesharat/gogenius/helpers"
 	"github.com/joho/godotenv"
 )
 
@@ -25,9 +26,7 @@ func GetWebpageURI(url string) string {
 
 func GetAccessToken() string {
 	err := godotenv.Load()
-	if err != nil {
-		panic(err)
-	}
+	helpers.CheckErr(err)
 	return os.Getenv("ACCESS_TOKEN")
 }
 
@@ -35,26 +34,18 @@ func SendRequest(url string) []byte {
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", url, nil)
 	req.Header.Add("Authorization", GetAuthorizationToken())
-	if err != nil {
-		panic(err)
-	}
+	helpers.CheckErr(err)
 	resp, err := client.Do(req)
-	if err != nil {
-		panic(err)
-	}
+	helpers.CheckErr(err)
 	data, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		panic(err)
-	}
+	helpers.CheckErr(err)
 
 	return data
 }
 
 func GetAuthorizationToken() string {
 	err := godotenv.Load()
-	if err != nil {
-		panic(err)
-	}
+	helpers.CheckErr(err)
 	return fmt.Sprintf("%s %s", "Bearer", os.Getenv("ACCESS_TOKEN"))
 }
 

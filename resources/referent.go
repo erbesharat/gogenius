@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 
 	"github.com/erbesharat/gogenius/handlers"
+	"github.com/erbesharat/gogenius/helpers"
 )
 
 type Referent struct {
@@ -29,9 +30,7 @@ type Referent struct {
 func JsonToRefrent(data []byte) *Referent {
 	var r = new(Referent)
 	err := json.NewDecoder(bytes.NewReader(data)).Decode(&r)
-	if err != nil {
-		panic(err)
-	}
+	helpers.CheckErr(err)
 	return r
 }
 

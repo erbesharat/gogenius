@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 
 	"github.com/erbesharat/gogenius/handlers"
+	"github.com/erbesharat/gogenius/helpers"
 )
 
 type WebPageResponse struct {
@@ -29,9 +30,7 @@ type WebPageResponse struct {
 func JsonToWebPage(data []byte) *WebPageResponse {
 	var r = new(WebPageResponse)
 	err := json.NewDecoder(bytes.NewReader(data)).Decode(&r)
-	if err != nil {
-		panic(err)
-	}
+	helpers.CheckErr(err)
 	return r
 }
 
